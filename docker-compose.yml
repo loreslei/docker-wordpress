@@ -12,6 +12,11 @@ services:
       MYSQL_PASSWORD: wp_password
     volumes:
       - ./db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
 
   wordpress1:
     image: wordpress:5.4.2-php7.2-apache
@@ -29,8 +34,10 @@ services:
   wordpress2:
     image: wordpress:5.4.2-php7.2-apache
     container_name: wordpress2
+    restart: on-failure
     depends_on:
       - db
+      - wordpress1
     environment:
       WORDPRESS_DB_HOST: db
       WORDPRESS_DB_USER: wp_user
@@ -42,8 +49,10 @@ services:
   wordpress3:
     image: wordpress:5.4.2-php7.2-apache
     container_name: wordpress3
+    restart: on-failure
     depends_on:
       - db
+      - wordpress2
     environment:
       WORDPRESS_DB_HOST: db
       WORDPRESS_DB_USER: wp_user
@@ -72,9 +81,11 @@ services:
       - "8089:8089"
     volumes:
       - ./locust-scripts:/mnt/locust
-    command: -f /mnt/locust/locustfile.py --host http://nginx
+    extra_hosts:
+      - "localhost:host-gateway"
+    # command: -f /mnt/locust/locustfile.py --host http://localhost:8080 --headless -u 160 -r 4 --run-time 2m --csv=/mnt/locust/resultado_leve/resultado_users
+    # command: -f /mnt/locust/locustfile.py --host http://localhost:8080 --headless -u 800 -r 20 --run-time 2m --csv=/mnt/locust/resultado_medio/resultado_users
+    command: -f /mnt/locust/locustfile.py --host http://localhost:8080 --headless -u 4000 -r 100 --run-time 2m --csv=/mnt/locust/resultado_pesado/resultado_users
     depends_on:
       - nginx
-    environment:
-      ATTACKED_HOST: http://nginx
-      LOCUST_OPTS: "--headless -u 100 -r 10 --run-time 2m --csv=resultados_100_users"
+    
