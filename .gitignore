@@ -1,0 +1,4 @@
+env
+__pycache__
+*.sock
+db_data/

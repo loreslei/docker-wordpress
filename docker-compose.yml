@@ -10,6 +10,8 @@ services:
       MYSQL_DATABASE: wordpress_db
       MYSQL_USER: wp_user
       MYSQL_PASSWORD: wp_password
+    volumes:
+      - ./db_data:/var/lib/mysql
 
   wordpress1:
     image: wordpress:5.4.2-php7.2-apache
@@ -62,3 +64,17 @@ services:
       - wordpress1
       - wordpress2
       - wordpress3
+
+  locust:
+    image: locustio/locust
+    container_name: locust_gerador
+    ports:
+      - "8089:8089"
+    volumes:
+      - ./locust-scripts:/mnt/locust
+    command: -f /mnt/locust/locustfile.py --host http://nginx
+    depends_on:
+      - nginx
+    environment:
+      ATTACKED_HOST: http://nginx
+      LOCUST_OPTS: "--headless -u 100 -r 10 --run-time 2m --csv=resultados_100_users"
