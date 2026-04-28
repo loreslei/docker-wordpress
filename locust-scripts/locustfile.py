@@ -5,12 +5,12 @@ class WebsiteUser(HttpUser):
 
     @task
     def cenario_1_imagem_1mb(self):
-        self.client.get("/?p=11", name="Cenário 1: Imagem 1MB")
+        self.client.get("/?p=10", name="Cenário 1: Imagem 1MB")
 
     @task
     def cenario_2_texto_400kb(self):
-        self.client.get("/?p=17", name="Cenário 2: Texto 400kb")
+        self.client.get("/?p=1", name="Cenário 2: Texto 400kb")
 
     @task
     def cenario_3_imagem_300kb(self):
-        self.client.get("/?p=14", name="Cenário 3: Imagem 300kb")
+        self.client.get("/?p=7", name="Cenário 3: Imagem 300kb")

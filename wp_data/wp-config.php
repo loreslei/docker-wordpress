@@ -1,6 +1,4 @@
 <?php
-define('WP_HOME', 'http://localhost:8080');
-define('WP_SITEURL', 'http://localhost:8080');
 /**
  * The base configuration for WordPress
  *
@@ -48,14 +46,14 @@ define( 'DB_COLLATE', '');
  *
  * @since 2.6.0
  */
-define( 'AUTH_KEY',         '305946b8896d6cc52065fa76fd0c2bc094777799');
-define( 'SECURE_AUTH_KEY',  '72ef168fd5da2b186acd0d2582b9df14b5e85237');
-define( 'LOGGED_IN_KEY',    '7655e82365318a7faa02f6acabff5a777653c16f');
-define( 'NONCE_KEY',        '8c96bd1e110cc4c82e778264ee624bc343463ab6');
-define( 'AUTH_SALT',        '203d5e7079a357280397a1c0d9ab6da696ca2e3b');
-define( 'SECURE_AUTH_SALT', '2aca5618d8559235445890bc82b02a58bc759206');
-define( 'LOGGED_IN_SALT',   '7470ca00f41dc483548edbbfed52a5e60fd3fa9c');
-define( 'NONCE_SALT',       'ceecb9d8bf79c2f19ae7c19e21b2eaff07440339');
+define( 'AUTH_KEY',         '8fb1caf6168721fd0f974b0bd3563b118bd3d6ae');
+define( 'SECURE_AUTH_KEY',  'd6f34197d858f5801439fc92403a78e6a1d85193');
+define( 'LOGGED_IN_KEY',    '6866d301dc72988decba13c6495b0bca95a11d09');
+define( 'NONCE_KEY',        '9b2bc17307c1662dabc790f88ab5ff2ce3b7b731');
+define( 'AUTH_SALT',        '7ce854a6a6640da3fc8a2cd5d4834319e3784379');
+define( 'SECURE_AUTH_SALT', '39c91d4385830add41dce1285a273d15a0758125');
+define( 'LOGGED_IN_SALT',   '78fadf513c48746ce58eddc950fb5a24dc0d352f');
+define( 'NONCE_SALT',       '587c89651bb8f5658010256ed8ed8068c611a8a2');
 
 /**#@-*/
 
@@ -81,18 +79,3 @@ $table_prefix = 'wp_';
  */
 define( 'WP_DEBUG', false );
 
-// If we're behind a proxy server and using HTTPS, we need to alert WordPress of that fact
-// see also http://codex.wordpress.org/Administration_Over_SSL#Using_a_Reverse_Proxy
-if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
-	$_SERVER['HTTPS'] = 'on';
-}
-
-/* That's all, stop editing! Happy publishing. */
-
-/** Absolute path to the WordPress directory. */
-if ( ! defined( 'ABSPATH' ) ) {
-	define( 'ABSPATH', __DIR__ . '/' );
-}
-
-/** Sets up WordPress vars and included files. */
-require_once ABSPATH . 'wp-settings.php';

@@ -1,10 +1,13 @@
 Method,Name,Error,Occurrences
-GET,Cenário 3: Imagem 300kb,RemoteDisconnected('Remote end closed connection without response'),2640
-GET,Cenário 2: Texto 400kb,"ConnectionRefusedError(111, 'Connection refused')",208
-GET,Cenário 2: Texto 400kb,RemoteDisconnected('Remote end closed connection without response'),2512
-GET,Cenário 1: Imagem 1MB,HTTPError('500 Server Error: Internal Server Error for url: Cenário 1: Imagem 1MB'),548
-GET,Cenário 2: Texto 400kb,HTTPError('500 Server Error: Internal Server Error for url: Cenário 2: Texto 400kb'),520
-GET,Cenário 3: Imagem 300kb,"ConnectionRefusedError(111, 'Connection refused')",211
-GET,Cenário 1: Imagem 1MB,RemoteDisconnected('Remote end closed connection without response'),2551
-GET,Cenário 3: Imagem 300kb,HTTPError('500 Server Error: Internal Server Error for url: Cenário 3: Imagem 300kb'),541
-GET,Cenário 1: Imagem 1MB,"ConnectionRefusedError(111, 'Connection refused')",192
+GET,Cenário 3: Imagem 300kb,RemoteDisconnected('Remote end closed connection without response'),143
+GET,Cenário 2: Texto 400kb,"ConnectionRefusedError(111, 'Connection refused')",218
+GET,Cenário 2: Texto 400kb,RemoteDisconnected('Remote end closed connection without response'),154
+GET,Cenário 3: Imagem 300kb,HTTPError('502 Server Error: Bad Gateway for url: Cenário 3: Imagem 300kb'),1273
+GET,Cenário 1: Imagem 1MB,HTTPError('500 Server Error: Internal Server Error for url: Cenário 1: Imagem 1MB'),18280
+GET,Cenário 2: Texto 400kb,HTTPError('500 Server Error: Internal Server Error for url: Cenário 2: Texto 400kb'),18435
+GET,Cenário 3: Imagem 300kb,"ConnectionRefusedError(111, 'Connection refused')",213
+GET,Cenário 1: Imagem 1MB,HTTPError('502 Server Error: Bad Gateway for url: Cenário 1: Imagem 1MB'),1298
+GET,Cenário 2: Texto 400kb,HTTPError('502 Server Error: Bad Gateway for url: Cenário 2: Texto 400kb'),1232
+GET,Cenário 1: Imagem 1MB,RemoteDisconnected('Remote end closed connection without response'),143
+GET,Cenário 3: Imagem 300kb,HTTPError('500 Server Error: Internal Server Error for url: Cenário 3: Imagem 300kb'),18587
+GET,Cenário 1: Imagem 1MB,"ConnectionRefusedError(111, 'Connection refused')",172
