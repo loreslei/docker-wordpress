@@ -1,7 +1,0 @@
-Method,Name,Error,Occurrences
-GET,Cenário 3: Imagem 300kb,RemoteDisconnected('Remote end closed connection without response'),119
-GET,Cenário 2: Texto 400kb,RemoteDisconnected('Remote end closed connection without response'),122
-GET,Cenário 1: Imagem 1MB,HTTPError('500 Server Error: Internal Server Error for url: Cenário 1: Imagem 1MB'),52
-GET,Cenário 2: Texto 400kb,HTTPError('500 Server Error: Internal Server Error for url: Cenário 2: Texto 400kb'),59
-GET,Cenário 1: Imagem 1MB,RemoteDisconnected('Remote end closed connection without response'),124
-GET,Cenário 3: Imagem 300kb,HTTPError('500 Server Error: Internal Server Error for url: Cenário 3: Imagem 300kb'),63

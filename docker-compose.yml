@@ -90,8 +90,8 @@ services:
       - ./locust-scripts:/mnt/locust
     extra_hosts:
       - "localhost:host-gateway"
-    command: -f /mnt/locust/locustfile.py --host http://localhost:8080 --headless -u 160 -r 4 --run-time 2m --csv=/mnt/locust/resultado_leve/resultado_users
-    # command: -f /mnt/locust/locustfile.py --host http://localhost:8080 --headless -u 800 -r 20 --run-time 2m --csv=/mnt/locust/resultado_medio/resultado_users
-    # command: -f /mnt/locust/locustfile.py --host http://localhost:8080 --headless -u 2000 -r 100 --run-time 2m --csv=/mnt/locust/resultado_pesado/resultado_users
+    # command: -f /mnt/locust/locustfile.py --host http://localhost:8080 --headless -u 160 -r 4 --run-time 3m --csv=/mnt/locust/resultado_leve/resultado_users
+    # command: -f /mnt/locust/locustfile.py --host http://localhost:8080 --headless -u 240 -r 10 --run-time 3m --csv=/mnt/locust/resultado_medio/resultado_users
+    command: -f /mnt/locust/locustfile.py --host http://localhost:8080 --headless -u 360 -r 13 --run-time 3m --csv=/mnt/locust/resultado_pesado/resultado_users
     depends_on:
       - nginx
