@@ -4,78 +4,86 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 def generate_graphs():
-    # Diretório atual (locust_graphics) e diretório base do projeto
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    project_dir = os.path.dirname(current_dir)
-    scripts_dir = os.path.join(project_dir, "locust-scripts")
+    base_results_path = os.path.join(current_dir, "..", "locust-scripts", "resultados")
 
+    instancias = ["1_instancias", "2_instancias", "3_instancias"]
+    cenarios = ["cenario_1", "cenario_2", "cenario_3"]
     levels = ["leve", "medio", "pesado"]
-    data = []
     
-    # Coletar dados dos 3 diretórios
-    for level in levels:
-        folder_name = f"resultado_{level}"
-        csv_path = os.path.join(scripts_dir, folder_name, "resultado_users_stats.csv")
-        
-        if os.path.exists(csv_path):
-            df = pd.read_csv(csv_path)
-            # Remover linha de 'Aggregated' (totalizadores)
-            df = df[df["Name"] != "Aggregated"]
-            # O locust pode ter linhas vazias ao final ou algo do tipo
-            df = df.dropna(subset=["Name"])
-            
-            # Adicionar coluna indicando o nível de carga
-            df["Level"] = level.capitalize()
-            data.append(df)
-        else:
-            print(f"Aviso: Arquivo não encontrado - {csv_path}")
-            
-    if not data:
-        print("Nenhum dado encontrado para gerar os gráficos.")
+    all_data = []
+
+    for inst in instancias:
+        for cen in cenarios:
+            for lvl in levels:
+                file_name = f"resultado_{lvl}_stats.csv"
+                csv_path = os.path.join(base_results_path, inst, cen, file_name)
+                
+                if os.path.exists(csv_path):
+                    try:
+                        df = pd.read_csv(csv_path)
+                        df_agg = df[df["Name"] == "Aggregated"].copy()
+                        
+                        if not df_agg.empty:
+                            df_agg["Instâncias"] = inst.replace("_", " ").capitalize()
+                            df_agg["Cenário"] = cen.replace("_", " ").capitalize()
+                            df_agg["Carga"] = lvl.capitalize()
+                            df_agg["Taxa de Falha (%)"] = (df_agg["Failure Count"] / df_agg["Request Count"]) * 100
+                            
+                            all_data.append(df_agg)
+                    except Exception as e:
+                        print(f"Erro ao ler {csv_path}: {e}")
+                else:
+                    print(f"Aviso: Arquivo não encontrado: {csv_path}")
+
+    if not all_data:
+        print("Nenhum dado encontrado. Verifique se os arquivos CSV estão nos diretórios corretos.")
         return
-        
-    combined_df = pd.concat(data, ignore_index=True)
-    
-    # Definir quais métricas vamos plotar
-    metrics = {
-        "Average Response Time": "Tempo Médio de Resposta (ms)",
-        "Requests/s": "Requisições por Segundo",
-        "Failure Count": "Número de Falhas"
-    }
 
-    # Definir o estilo visual (sns fornece cores mais agradáveis)
+    combined_df = pd.concat(all_data, ignore_index=True)
     sns.set_theme(style="whitegrid")
-    level_order = ["Leve", "Medio", "Pesado"]
+    
+    carga_order = ["Leve", "Medio", "Pesado"]
 
-    for metric, label in metrics.items():
-        if metric in combined_df.columns:
-            plt.figure(figsize=(10, 6))
-            
-            # Criar um gráfico de barras agrupado usando seaborn
-            ax = sns.barplot(
-                data=combined_df, 
-                x="Name", 
-                y=metric, 
-                hue="Level",
-                hue_order=[l for l in level_order if l in combined_df["Level"].unique()],
-                palette="viridis"
-            )
-            
-            plt.title(f"{label} por Cenário e Nível de Carga", fontsize=14, pad=15)
-            plt.ylabel(label, fontsize=12)
-            plt.xlabel("Cenários", fontsize=12)
-            plt.xticks(rotation=45, ha='right')
-            plt.legend(title="Nível de Carga")
-            
-            # Ajustar layout para não cortar labels
-            plt.tight_layout()
-            
-            # Salvar imagem
-            filename = f"grafico_{metric.replace(' ', '_').replace('/', '_').lower()}.png"
-            output_file = os.path.join(current_dir, filename)
-            plt.savefig(output_file, dpi=300)
-            plt.close()
-            print(f"Gráfico gerado com sucesso: {output_file}")
+    for cen_name in combined_df["Cenário"].unique():
+        df_cenario = combined_df[combined_df["Cenário"] == cen_name]
+
+        plt.figure(figsize=(12, 7))
+        ax = sns.barplot(
+            data=df_cenario, 
+            x="Carga", 
+            y="95%", 
+            hue="Instâncias",
+            order=carga_order,
+            palette="viridis"
+        )
+        plt.title(f"Percentil 95 (P95) - {cen_name}", fontsize=15)
+        plt.ylabel("Tempo de Resposta (ms)")
+        plt.legend(title="Infraestrutura", bbox_to_anchor=(1.05, 1), loc='upper left')
+        plt.tight_layout()
+        
+        plt.savefig(os.path.join(current_dir, f"p95_{cen_name.lower().replace(' ', '_')}.png"))
+        plt.close()
+
+        plt.figure(figsize=(12, 7))
+        ax = sns.barplot(
+            data=df_cenario, 
+            x="Carga", 
+            y="Taxa de Falha (%)", 
+            hue="Instâncias",
+            order=carga_order,
+            palette="magma"
+        )
+        plt.title(f"Taxa de Falha (%) - {cen_name}", fontsize=15)
+        plt.ylabel("Falhas (%)")
+        plt.ylim(0, max(combined_df["Taxa de Falha (%)"].max() * 1.2, 5))  
+        plt.legend(title="Infraestrutura", bbox_to_anchor=(1.05, 1), loc='upper left')
+        plt.tight_layout()
+
+        plt.savefig(os.path.join(current_dir, f"falhas_{cen_name.lower().replace(' ', '_')}.png"))
+        plt.close()
+
+    print(f"Processamento concluído. Gráficos salvos em: {current_dir}")
 
 if __name__ == "__main__":
     generate_graphs()
