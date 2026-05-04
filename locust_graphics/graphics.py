@@ -8,7 +8,7 @@ def generate_graphs():
     base_results_path = os.path.join(current_dir, "..", "locust-scripts", "resultados")
 
     instancias = ["1_instancias", "2_instancias", "3_instancias"]
-    cenarios = ["cenario_1", "cenario_2", "cenario_3"]
+    cenarios = ["cenario_1", "cenario_2", "cenario_3", "cenario_TODOS"]
     levels = ["leve", "medio", "pesado"]
     
     all_data = []
