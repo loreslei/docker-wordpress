@@ -38,3 +38,29 @@ Com base na análise dos gráficos e na natureza dos scripts simulados, podemos 
 4. **Estabilidade em Fluxos Leves**: Para o perfil de uso dos Cenários 1 e 3, a infraestrutura está adequada sob cargas leves e médias. Ela garante respostas rápidas e retenção total das requisições sem falhas, cumprindo o seu papel satisfatoriamente.
 
 > **Próximos Passos recomendados:** Investigar o consumo de CPU e limite de conexões (`max_connections`) no serviço de Banco de Dados (MySQL) durante o teste do Cenário Todos em carga pesada. Configurar também um sistema de cache em nível de aplicação para evitar consultas repetidas à base.
+
+## 📉 Gráficos
+
+<br>
+<img width="1200" height="700" alt="Image" src="https://github.com/user-attachments/assets/84d30215-c4b6-48a3-b6b4-aa19e623c2d0" />
+<br><br>
+
+<img width="1200" height="700" alt="Image" src="https://github.com/user-attachments/assets/2de6898f-9b8d-4511-866e-de678aa99798" />
+<br><br>
+
+<img width="1200" height="700" alt="Image" src="https://github.com/user-attachments/assets/98ab618e-6e16-48f1-a36d-147ae3e5b80c" />
+<br><br>
+
+<img width="1200" height="700" alt="Image" src="https://github.com/user-attachments/assets/db12347b-e3f2-4931-8019-9760f069f18f" />
+<br><br>
+
+<img width="1200" height="700" alt="Image" src="https://github.com/user-attachments/assets/09a954f9-8a03-4728-9ae7-9b488f76712a" />
+<br><br>
+
+<img width="1200" height="700" alt="Image" src="https://github.com/user-attachments/assets/db03c67d-0ca5-4e57-9fc6-ab3581622a79" />
+<br><br>
+
+<img width="1200" height="700" alt="Image" src="https://github.com/user-attachments/assets/3b0fd4a5-d3ac-411e-aafb-8b06894e9602" />
+<br><br>
+
+<img width="1200" height="700" alt="Image" src="https://github.com/user-attachments/assets/c0b2fe3f-67b6-46f8-b640-dc0ad2628808" />
