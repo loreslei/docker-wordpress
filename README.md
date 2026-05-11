@@ -2,6 +2,10 @@
 
 Este diretório contém os gráficos gerados a partir dos resultados dos testes de carga realizados com o Locust. Os gráficos ilustram o comportamento da aplicação sob três diferentes níveis de carga (**Leve**, **Médio** e **Pesado**) e infraestruturas com diferentes números de instâncias (**1, 2 e 3 instâncias**). 
 
+Cargas:
+- **Leve:** 160 **usuários** 4 **req/s**
+- **Média:** 240 **usuários** 10 **req/s**
+- **Pesada:** 360 **usuários** 13 **req/s**  
 Foram analisados quatro cenários distintos, baseados nos *endpoints* do WordPress:
 - **Cenário 1:** Requisição ao Post contendo uma **Imagem de 1MB**.
 - **Cenário 2:** Requisição ao Post contendo um **Texto longo de 400kb**.
