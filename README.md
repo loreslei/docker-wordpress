@@ -1,5 +1,14 @@
 # Análise de Testes de Carga - Locust
 
+# Equipe
+
+| Nome                                | Matrícula             |
+|-------------------------------------|-----------------------|
+| Bianca Oriá Leite                   | 2320323               |
+| João Felipe Ribeiro de Melo         | 2315045               |
+| João Pedro Ribeiro Mendes           | 2315069               |
+| Lorenna Aguiar Nunes                | 2315026               |
+
 Este diretório contém os gráficos gerados a partir dos resultados dos testes de carga realizados com o Locust. Os gráficos ilustram o comportamento da aplicação sob três diferentes níveis de carga (**Leve**, **Médio** e **Pesado**) e infraestruturas com diferentes números de instâncias (**1, 2 e 3 instâncias**). 
 
 Cargas:
